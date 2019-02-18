@@ -1,0 +1,19 @@
+version: '3.2'
+
+services:
+  jboss:
+    image: jboss/wildfly
+    ports:
+      - 8080:8080
+      - 9990:9990
+    networks:
+      - jboss_network
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.platform.os == linux]
+
+networks:
+  jboss_network:
+    driver: overlay
+    attachable: true
