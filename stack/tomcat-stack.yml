@@ -1,0 +1,19 @@
+version: '3.2'
+
+services:
+  tomcat:
+    image: tomcat:8.0
+    # External accesible port 8180
+    ports:
+      - 8180:8080
+    networks:
+      - tomcat_network
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.platform.os == linux]
+
+networks:
+  tomcat_network:
+    driver: overlay
+    attachable: true
